@@ -1,7 +1,7 @@
 # Offr Shopify SDK
 
-This repo helps you create Offrs for Shopify with native support for TypeScript.
-It contains:
+This repo helps you create [Offr(s) for Shopify](https://apps.shopify.com/offr)
+with native support for TypeScript. It contains:
 
 - `examples`: quick-starts to create your own Offrs.
   - `endpoint` host your own offr calculations
