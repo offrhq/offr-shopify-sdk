@@ -1,0 +1,26 @@
+{
+  "deno.enable": true,
+  "cSpell.words": [
+    "autoload",
+    "codegen",
+    "Deno",
+    "metafield",
+    "metafields",
+    "Metaobjects",
+    "myshopify",
+    "Offr",
+    "Prefs",
+    "requestable",
+    "singlefile"
+  ],
+  "cSpell.ignorePaths": [
+    "package-lock.json",
+    "node_modules",
+    "vscode-extension",
+    ".git/{info,lfs,logs,refs,objects}/**",
+    ".git/{index,*refs,*HEAD}",
+    ".vscode",
+    ".vscode-insiders",
+    "**/introspectionJson/**"
+  ]
+}
