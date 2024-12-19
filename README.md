@@ -11,7 +11,7 @@ with native support for TypeScript. It contains:
 # Requirements
 
 This package uses Deno (see
-[cli install instrucitons](https://docs.deno.com/runtime/getting_started/installation/)).
+[cli install instructions](https://docs.deno.com/runtime/getting_started/installation/)).
 If you aren't familiar,
 [Deno is an improvement on NodeJS](https://deno.com/learn/nodes-complexity-problem)
 for JavaScript / TypeScript. You can get started with
@@ -21,7 +21,7 @@ for JavaScript / TypeScript. You can get started with
 
 Suppose you want to update the pricing of the example fish tank Offr:
 
-1. In [`examples/endpoint`](/examples/endpoint) you make the appropriate chnage.
+1. In [`examples/endpoint`](/examples/endpoint) you make the appropriate change.
 2. You push your changes to your free Deno server.
 3. Edit [`examples/html`](/examples/html) to add a sale banner to your product
    page.
