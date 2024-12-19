@@ -1,0 +1,44 @@
+<div class="flex">
+  <div>
+    <label for="lengthInches" class="form__label">Length (inches)</label>
+    <!-- node the max length is 8' and we only allow 1/8" increments -->
+    <input
+      id="lengthInches"
+      type="number"
+      min="1"
+      max="192"
+      step=".125"
+      name="lengthInches"
+      required
+    />
+  </div>
+  <div>
+    <label for="widthInches" class="form__label">Width (inches)</label>
+    <input
+      id="widthInches"
+      type="number"
+      min="1"
+      max="192"
+      step=".125"
+      name="widthInches"
+      required
+    />
+  </div>
+  <div>
+    <label for="heightInches" class="form__label">Height (inches)</label>
+    <input
+      id="heightInches"
+      type="number"
+      min="1"
+      max="192"
+      step=".125"
+      name="heightInches"
+      required
+    />
+  </div>
+</div>
+<div id="offrPicker" class="flex"></div>
+<div id="offrPrice"></div>
+<div id="offrInfo"></div>
+<link rel="stylesheet" href="src/style.css" />
+<script type="module" src="src/main.ts"></script>

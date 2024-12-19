@@ -1,0 +1,24 @@
+.flex {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 1em;
+}
+.flex div {
+  flex-grow: 1;
+  display: block;
+  padding-bottom: 1em;
+}
+.flex input,
+.flex select {
+  width: 100%;
+  border-radius: 0;
+  border: solid 1px;
+  padding: 0.5em;
+}
+.flex input[type="checkbox"] {
+  width: inherit;
+}
+#offrPrice {
+  font-size: 1.5em;
+}
