@@ -10,12 +10,11 @@ with native support for TypeScript. It contains:
 
 # Requirements
 
-This package uses Deno (see
-[cli install instructions](https://docs.deno.com/runtime/getting_started/installation/)).
-If you aren't familiar,
-[Deno is an improvement on NodeJS](https://deno.com/learn/nodes-complexity-problem)
-for JavaScript / TypeScript. You can get started with
-[Deno in VS Code](https://github.com/denoland/vscode_deno) in seconds.
+1. Deno ^2.0.2 - [here's why](/examples/html). If you aren't familiar,
+   [Deno is an improvement over NodeJS](https://deno.com/learn/nodes-complexity-problem)
+   for JavaScript / TypeScript.
+2. Once you install the CLI, you should
+   [setup your editor](https://docs.deno.com/runtime/getting_started/setup_your_environment).
 
 # How To
 
