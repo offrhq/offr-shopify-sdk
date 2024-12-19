@@ -8,6 +8,15 @@ with native support for TypeScript. It contains:
   - `html` bundle HTML, CSS, and script to an efficient HTML file for Offr
 - `lib`: utilities and types for your code
 
+# Requirements
+
+This package uses Deno (see
+[cli install instrucitons](https://docs.deno.com/runtime/getting_started/installation/)).
+If you aren't familiar,
+[Deno is an improvement on NodeJS](https://deno.com/learn/nodes-complexity-problem)
+for JavaScript / TypeScript. You can get started with
+[Deno in VS Code](https://github.com/denoland/vscode_deno) in seconds.
+
 # How To
 
 Suppose you want to update the pricing of the example fish tank Offr:

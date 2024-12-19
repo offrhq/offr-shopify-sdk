@@ -14,13 +14,8 @@ Deploy.
 
 ### Hosting with Deno Deploy
 
-If you aren't familiar,
-[Deno is an improvement on NodeJS](https://deno.com/learn/nodes-complexity-problem)
-for JavaScript / TypeScript.
 [Deno Deploy offers hosting which is easy, fast, and free](https://deno.com/deploy).
-You can get started with
-[Deno in VS Code](https://github.com/denoland/vscode_deno) in seconds. To create
-your endpoint on Deno Deploy:
+To create your endpoint on Deno Deploy:
 
 1. Fork this repo
 2. [Connect](https://docs.deno.com/deploy/manual/how-to-deploy/) your Deno
