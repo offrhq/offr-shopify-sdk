@@ -200,7 +200,8 @@ const getUtils = (settings: Settings) => {
   };
 };
 
-const initDetail = {
+// create a temporary file to record type
+const _initDetail = {
   type: "init" as const,
   settings: _settings,
   offrSetup: (settings: Settings) => {
@@ -208,8 +209,12 @@ const initDetail = {
     return { utils: getUtils(settings) };
   },
 };
-export type OffrInitEventDetail = typeof initDetail;
-
+// save to global for those who may miss the event
+initDetail = _initDetail;
 document.dispatchEvent(
   new CustomEvent<OffrInitEventDetail>("offr", { detail: initDetail })
 );
+
+export type OffrInitEventDetail = typeof _initDetail;
+// deno-lint-ignore no-var
+declare var initDetail: OffrInitEventDetail;

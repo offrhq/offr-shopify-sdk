@@ -5,7 +5,6 @@ import { createHtmlPlugin } from "npm:vite-plugin-html@3.2.2";
 export default defineConfig({
   base: "./",
   build: {
-    target: "es2020",
     emptyOutDir: false,
   },
   plugins: [
@@ -30,7 +29,7 @@ export default defineConfig({
     {
       transformIndexHtml(html) {
         return (
-          `<meta build-timestamp="${new Date()
+          `<meta offr-build-timestamp="${new Date()
             .toISOString()
             .substring(0, 19)}" />\n` + html
         );

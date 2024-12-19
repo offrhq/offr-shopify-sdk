@@ -1,9 +1,8 @@
 // TYPES ONLY. Avoid coupled code and bloat:
 // DO NOT import values provided by appBlockScript
-import type {
-  OffrEventDetail,
-  Settings,
-} from "../../../lib/appBlockScript/src/index.ts";
+import type { Settings } from "../../../lib/appBlockScript/src/index.ts";
+import { OffrInitEventDetail } from "../../../lib/appBlockScript/src/index.ts";
+import { OffrEventDetail } from "../../../lib/appBlockScript/src/types.ts";
 import { requireEl } from "../../../lib/common/utils.ts";
 
 // elements set in our Offr HTML
@@ -15,33 +14,31 @@ const offrPriceElement = requireEl<HTMLElement>(document, "#offrPrice");
 const offrPickerElement = requireEl<HTMLElement>(document, "#offrPicker");
 
 // core info expected from Offr init
-/** The core product form Shopify uses for add-to-cart */
-let productForm: HTMLFormElement;
 let settings: Settings;
 let utils: ReturnType<
   (OffrEventDetail & { type: "init" })["offrSetup"]
 >["utils"];
 
-// debounce
-/** https://developer.mozilla.org/en-US/docs/Web/API/Window/setTimeout#return_value */
-let timeout: number;
-/** defer network calls to avoid unwanted delays  */
+/* debounce network calls to avoid unwanted delays */
 const debounceCalculate = () => {
   clearTimeout(timeout); // cancel any previous queued calls
   timeout = setTimeout(() => {
-    if (!productForm.reportValidity()) return; // block bad calls
+    if (!settings.productForm.reportValidity()) return; // block bad calls
+    const formData = new FormData(settings.productForm);
+    // disable elements AFTER formData (or we get no data)
     utils.disableElements(settings.controls.offrInputs);
     utils.disableElements(settings.controls.themeInputs);
     utils.disableElements(settings.controls.buyButtons);
-    const formData = new FormData(productForm);
     utils.calculate(formData); // no await; will dispatch event on response
     offrInfoElement.innerHTML = "Checking price...";
     clearTimeout(timeout);
   }, 1000);
 };
+/** https://developer.mozilla.org/en-US/docs/Web/API/Window/setTimeout#return_value */
+let timeout: number;
 
 // handle any/all Offr events
-document.addEventListener("offr", (e) => {
+const offrEventListener = (e: CustomEvent<OffrEventDetail>) => {
   if (e.detail.type === "init") {
     const { productForm, productFormId, productVariantInputElement } =
       e.detail.settings;
@@ -118,10 +115,21 @@ document.addEventListener("offr", (e) => {
     utils.enableElements(settings.controls.offrInputs);
     utils.enableElements(settings.controls.themeInputs);
   }
-});
+};
+
+//*****
+// Wait for Offr to load our code
+document.addEventListener("offr", offrEventListener);
+if (typeof initDetail !== "undefined")
+  document.dispatchEvent(
+    new CustomEvent<OffrInitEventDetail>("offr", { detail: initDetail })
+  );
 
 declare global {
   interface DocumentEventMap {
     offr: CustomEvent<OffrEventDetail>;
   }
 }
+/** If Offr already loaded, the data is available in this variable */
+// deno-lint-ignore no-var
+declare var initDetail: OffrInitEventDetail;
