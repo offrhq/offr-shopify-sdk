@@ -2,10 +2,6 @@
 
 Use this template to create the HTML for an Offr
 
-```shell
-(cd examples/html && deno run --allow-all npm:vite)
-```
-
 # Requirements
 
 Deno 2.0.2+ to

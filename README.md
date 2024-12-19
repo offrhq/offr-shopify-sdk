@@ -33,6 +33,8 @@ deno task html:dev
 deno task html:build
 ```
 
+You can see all available tasks in [`deno.jsonc`](deno.jsonc)
+
 # Contributing
 
 If you are a developer with questions, please post in discussions before raising
