@@ -1,15 +1,22 @@
-# Offr Shopify Examples
+# Offr Shopify SDK
 
-This repo contains examples / templates which you can use to create your own
-Offrs.
+This repo helps you create Offrs for Shopify with native support for TypeScript.
+It contains:
 
-## Generate Endpoint Types
+- `examples`: quick-starts to create your own Offrs.
+  - `endpoint` host your own offr calculations
+  - `html` bundle HTML, CSS, and script to an efficient HTML file for Offr
+- `lib`: utilities and types for your code
 
-Although you probably won't need to do this, we provide a code generator to
-avoid the labor of recreating Shopify's GraphQL schema within TypeScrip. The
-generated TypeScript file can be added to the repo. For example: we already
-include `admin.2024-07.graphql.ts`
+# CLI
+
+Our SDK CLI is built with Vite and Deno. You can use the CLI to build your code.
+For example (from the root of the repository):
 
 ```shell
-deno run --allow-env --allow-sys --allow-read --allow-write ./examples/endpoint/src/shopify/_codegen.ts
+# edit your html with instant updates in-browser
+deno task html:dev
+
+# minify your html so it is ready to add as an Offr
+deno task html:build
 ```
