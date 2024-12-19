@@ -12,12 +12,14 @@ It contains:
 
 Suppose you want to update the pricing of the example fish tank Offr:
 
-1. In `examples/endpoint` you make the appropriate chnage.
+1. In [`examples/endpoint`](/tree/main/examples/endpoint) you make the
+   appropriate chnage.
 2. You push your changes to your free Deno server.
-3. Edit `examples/html` to add a sale banner to your product page.
+3. Edit [`examples/html`](/tree/main/examples/html) to add a sale banner to your
+   product page.
 4. `deno task html:build` to bundle your changes.
-5. Copy the newest code in `examples/html/dist` to your Offr within Shopify
-   admin.
+5. Copy the newest code in [`examples/html/dist`](/tree/main/examples/html/dist)
+   to your Offr within Shopify admin.
 
 # CLI
 
