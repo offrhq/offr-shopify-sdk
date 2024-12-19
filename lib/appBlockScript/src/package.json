@@ -1,0 +1,10 @@
+{
+  "//": "// package.json for vite/rollup dependencies. see ./deno.jsonc",
+  "name": "offr-app-block-script",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "devDependencies": {
+    "@shopify/admin-graphql-api-utilities": "^2.2.0"
+  }
+}
