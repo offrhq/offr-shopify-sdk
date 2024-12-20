@@ -12,7 +12,8 @@
     "Offrs",
     "Prefs",
     "requestable",
-    "singlefile"
+    "singlefile",
+    "vite"
   ],
   "cSpell.ignorePaths": [
     "package-lock.json",
