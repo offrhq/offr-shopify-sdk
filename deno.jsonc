@@ -17,8 +17,6 @@
     "html:dev": "(cd examples/html && deno run --allow-all npm:vite)",
     "html:build": "(cd examples/html && deno run --allow-all npm:vite build && wait && deno run --allow-read --allow-write rename.ts)",
 
-    "sync:repo": "git pull https://github.com/offrhq/offr-shopify-sdk",
-
     // *****Tasks for lib below (most users won't use these)*******
     // generate the app block script
     "appBlockScript:install": "(cd lib/appBlockScript/src && deno install)",

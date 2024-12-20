@@ -39,9 +39,6 @@ deno task html:dev
 
 # minify your html so it is ready to add as an Offr
 deno task html:build
-
-# sync your repo to ours
-deno task sync:repo
 ```
 
 You can see all available tasks in [`deno.jsonc`](deno.jsonc)
