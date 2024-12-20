@@ -13,13 +13,16 @@
    * https://docs.deno.com/runtime/fundamentals/configuration/#tasks
    */
   "tasks": {
+    // install node_modules for bundling
+    "html:install": "(cd examples/html/src && deno install)",
     // generate html+css+script to use in an offr
     "html:dev": "(cd examples/html && deno run --allow-all npm:vite)",
     "html:build": "(cd examples/html && deno run --allow-all npm:vite build && wait && deno run --allow-read --allow-write rename.ts)",
 
     // *****Tasks for lib below (most users won't use these)*******
-    // generate the app block script
+    // install node_modules for bundling
     "appBlockScript:install": "(cd lib/appBlockScript/src && deno install)",
+    // generate the app block script
     "appBlockScript:build": "(cd lib/appBlockScript && deno run --allow-all npm:vite build)",
 
     // generate GQL SDK

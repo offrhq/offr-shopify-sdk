@@ -1,10 +1,8 @@
 {
   "//": "// package.json for vite/rollup. see `deno.jsonc` install tasks",
-  "name": "offr-app-block-script",
+  "name": "offr-shopify-sdk-html",
   "private": true,
   "version": "0.0.1",
   "type": "module",
-  "devDependencies": {
-    "@shopify/admin-graphql-api-utilities": "^2.2.0"
-  }
+  "devDependencies": {}
 }
