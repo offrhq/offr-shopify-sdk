@@ -18,6 +18,8 @@ with native support for TypeScript. It contains:
 
 # How To
 
+To get started: `git clone https://github.com/offrhq/offr-shopify-sdk my-offr`.
+
 Suppose you want to update the pricing of the example fish tank Offr:
 
 1. In [`examples/endpoint`](/examples/endpoint) you make the appropriate change.
