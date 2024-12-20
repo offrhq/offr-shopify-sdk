@@ -1,8 +1,9 @@
 import { parseGid } from "@shopify/admin-graphql-api-utilities";
-import type { Settings, OffrEventDetail } from "./index.ts";
+import type { Settings } from "./index.ts";
 import { getCurrencyRebaseUtil } from "./forShopify.ts";
 import type {
   MaybeAllocatedDetail,
+  OffrEventDetail,
   SellingPlan,
   SellingPlanWithAllocation,
 } from "./types.ts";

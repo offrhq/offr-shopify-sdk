@@ -4,7 +4,7 @@ import {
   SellingPlanGroupInputSchema,
   SellingPlanGroupResourceInputSchema,
   SellingPlanInputSchema,
-} from "./codegen/admin.2024-07.graphql.ts";
+} from "./gql/admin.2024-07.graphql.ts";
 
 /**
  * To provide helpful error messages to the shopper,

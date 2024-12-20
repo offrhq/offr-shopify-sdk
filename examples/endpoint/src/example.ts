@@ -1,6 +1,6 @@
 import { z } from "npm:zod@3.23.8";
 import { calculationSuccessBodySchema } from "../../../lib/common/offr.ts";
-import type { SellingPlanInput } from "../../../lib/common/codegen/admin.2024-07.graphql.ts";
+import type { SellingPlanInput } from "../../../lib/common/gql/admin.2024-07.graphql.ts";
 
 /**
  * We use [Zod](https://zod.dev/) to enforce a schema of the data we expect.

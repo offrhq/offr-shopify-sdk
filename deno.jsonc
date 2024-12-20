@@ -23,7 +23,7 @@
     "appBlockScript:build": "(cd lib/appBlockScript && deno run --allow-all npm:vite build)",
 
     // generate GQL SDK
-    "generate:gql": "(cd lib/common/codegen && deno run --allow-env --allow-sys --allow-read --allow-write codegen.ts)"
+    "generate:gql": "(cd lib/common/gql && deno run --allow-env --allow-sys --allow-read --allow-write codegen.ts)"
   },
   "lint": {
     // don't lint generated javascript
