@@ -13,6 +13,7 @@
     "Prefs",
     "requestable",
     "singlefile",
+    "valibot",
     "vite"
   ],
   "cSpell.ignorePaths": [

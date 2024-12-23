@@ -92,6 +92,7 @@ export const calculationSuccessDataSchema = z
     customAttributes: z.array(z.tuple([z.string(), z.string()])),
   })
   .strict(); // give an error when attempting to add other properties
+export type SuccessData = z.infer<typeof calculationSuccessDataSchema>;
 
 /** To succeed, the endpoint response JSON must conform to this schema */
 export const calculationSuccessBodySchema = z.object({
@@ -110,11 +111,13 @@ export const calculationSuccessBodySchema = z.object({
       `'validUntil' must expire after 'validFrom'.`
     ),
 });
+export type SuccessBody = z.infer<typeof calculationSuccessBodySchema>;
 
 export const calculationResponseBodySchema = z.discriminatedUnion("success", [
   calculationSuccessBodySchema,
   errorBodySchema,
 ]);
+export type CalculationResponse = z.infer<typeof calculationResponseBodySchema>;
 
 export const appSuccessData = calculationSuccessDataSchema
   .omit({ sellingPlanGroupInput: true })

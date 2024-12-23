@@ -1,5 +1,6 @@
-import { handleCalculation } from "./example.ts";
 import { type ErrorBody } from "../../../lib/common/offr.ts";
+import { parseFormData } from "./input.ts";
+import { getPlanEntries, getSuccessBody } from "./output.ts";
 
 /**
  * This is the HTTP entry point.
@@ -24,7 +25,17 @@ const successHandler = async (req: Request) => {
    */
   const formData = await req.formData();
 
-  const response = handleCalculation(formData);
+  const parsed = parseFormData(formData);
+  if (!parsed.success)
+    return jsonResponse({
+      success: false,
+      publicMessage: `${parsed.issues.map((issue) => issue.message)}`,
+      privateError: parsed.issues,
+    } satisfies ErrorBody);
+
+  const input = parsed.output;
+  const planEntries = getPlanEntries(input);
+  const response = getSuccessBody(input, planEntries);
 
   // log for development; probably remove these for production
   console.dir(req, { depth: Infinity });

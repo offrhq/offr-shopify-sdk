@@ -1,31 +1,8 @@
-import { z } from "npm:zod@3.23.8";
-import { calculationSuccessBodySchema } from "../../../lib/common/offr.ts";
-import type { SellingPlanInput } from "../../../lib/common/gql/admin.2024-07.graphql.ts";
+import { SuccessBody, SuccessData } from "../../../lib/common/offr.ts";
+import { SellingPlanInput } from "../../../lib/common/gql/admin.2024-07.graphql.ts";
+import { Input } from "./input.ts";
 
-/**
- * We use [Zod](https://zod.dev/) to enforce a schema of the data we expect.
- * In our example, we are calculating pricing of an "example fish tank".
- *
- * We could choose impose additional restrictions.
- * For example, we could:
- * * restrict numbers to increments of .125
- * * put a max length for each side
- * * put a total volume limitation
- * * etc.
- */
-export const measurementsSchema = z.object({
-  lengthInches: z.coerce.number().positive(),
-  widthInches: z.coerce.number().positive(),
-  heightInches: z.coerce.number().positive(),
-});
-
-export const handleCalculation = (formData: FormData) => {
-  const measurements = measurementsSchema.parse({
-    lengthInches: formData.get("lengthInches"),
-    widthInches: formData.get("widthInches"),
-    heightInches: formData.get("heightInches"),
-  });
-
+export const getPlanEntries = (input: Input) => {
   const acrylicTank = {
     name: "Acrylic Fish Tank",
     options: ["Acrylic"],
@@ -45,10 +22,7 @@ export const handleCalculation = (formData: FormData) => {
           adjustmentValue: {
             fixedValue: `${(
               20.33 +
-              measurements.lengthInches *
-                measurements.widthInches *
-                measurements.heightInches *
-                0.02
+              input.lengthInches * input.widthInches * input.heightInches * 0.02
             ).toFixed(2)}`,
           },
         },
@@ -75,9 +49,9 @@ export const handleCalculation = (formData: FormData) => {
           adjustmentValue: {
             fixedValue: `${(
               25.33 +
-              measurements.lengthInches *
-                measurements.widthInches *
-                measurements.heightInches *
+              input.lengthInches *
+                input.widthInches *
+                input.heightInches *
                 0.021
             ).toFixed(2)}`,
           },
@@ -85,10 +59,19 @@ export const handleCalculation = (formData: FormData) => {
       },
     ],
   } satisfies SellingPlanInput;
+  return [
+    ["Acrylic", acrylicTank],
+    ["Glass", glassTank],
+  ] as const;
+};
 
+export const getSuccessBody = (
+  input: Input,
+  planEntries: ReturnType<typeof getPlanEntries>
+) => {
   const data = {
     sellingPlanGroupInput: {
-      sellingPlansToCreate: [acrylicTank, glassTank],
+      sellingPlansToCreate: planEntries.map(([_, entry]) => entry),
       name: "Custom Sized Fish Tank",
       options: ["Material"],
     },
@@ -99,12 +82,9 @@ export const handleCalculation = (formData: FormData) => {
     customAttributes: [
       [
         "Inches (LxWxH)",
-        `${measurements.lengthInches}x${measurements.widthInches}x${measurements.heightInches}`,
+        `${input.lengthInches}x${input.widthInches}x${input.heightInches}`,
       ],
     ],
-  } satisfies SuccessBody["data"];
-
+  } as const satisfies SuccessData;
   return { success: true, data } satisfies SuccessBody;
 };
-
-type SuccessBody = z.infer<typeof calculationSuccessBodySchema>;
