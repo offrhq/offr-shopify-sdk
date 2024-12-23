@@ -58,14 +58,11 @@ export type OffrAllocationsEventDetail = { type: "allocated" } & {
   ajaxProduct: Awaited<ReturnType<typeof fetchProduct>>;
 } & ReturnType<typeof buildSellingPlanPicker>;
 
-export type OffrChangeEventDetail = { type: "change" } & {
-  utils: ReturnType<OffrInitEventDetail["offrSetup"]>["utils"];
-  settings: OffrInitEventDetail["settings"];
-};
+export type OffrStaleEventDetail = { type: "stale" };
 
 export type OffrEventDetail =
   | OffrInitEventDetail
-  | OffrChangeEventDetail
+  | OffrStaleEventDetail
   | OffrResponseEventDetail
   | OffrSuccessEventDetail
   | OffrAllocationsEventDetail

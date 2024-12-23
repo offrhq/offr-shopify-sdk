@@ -3,7 +3,7 @@
 import type { Settings } from "../../../lib/appBlockScript/src/index.ts";
 import { OffrInitEventDetail } from "../../../lib/appBlockScript/src/index.ts";
 import { OffrEventDetail } from "../../../lib/appBlockScript/src/types.ts";
-import { requireEl } from "../../../lib/common/utils.ts";
+import { elementFromString, requireEl } from "../../../lib/common/utils.ts";
 
 // elements set in our Offr HTML
 /** To show status / errors / warnings */
@@ -12,6 +12,9 @@ const offrInfoElement = requireEl<HTMLElement>(document, "#offrInfo");
 const offrPriceElement = requireEl<HTMLElement>(document, "#offrPrice");
 /** To show a dropdown for shopper to select a plan option */
 const offrPickerElement = requireEl<HTMLElement>(document, "#offrPicker");
+const priceCheckElement = elementFromString<HTMLButtonElement>(
+  `<button>Check pricing</button>`
+);
 
 // core info expected from Offr init
 let settings: Settings;
@@ -19,23 +22,15 @@ let utils: ReturnType<
   (OffrEventDetail & { type: "init" })["offrSetup"]
 >["utils"];
 
-/* debounce network calls to avoid unwanted delays */
-const debounceCalculate = () => {
-  clearTimeout(timeout); // cancel any previous queued calls
-  timeout = setTimeout(() => {
-    if (!settings.productForm.reportValidity()) return; // block bad calls
-    const formData = new FormData(settings.productForm);
-    // disable elements AFTER formData (or we get no data)
-    utils.disableElements(settings.controls.offrInputs);
-    utils.disableElements(settings.controls.themeInputs);
-    utils.disableElements(settings.controls.buyButtons);
-    utils.calculate(formData); // no await; will dispatch event on response
-    offrInfoElement.innerHTML = "Checking price...";
-    clearTimeout(timeout);
-  }, 1000);
-};
-/** https://developer.mozilla.org/en-US/docs/Web/API/Window/setTimeout#return_value */
-let timeout: number;
+priceCheckElement.addEventListener("click", () => {
+  if (!settings.productForm.reportValidity()) return; // block bad calls
+  const formData = new FormData(settings.productForm);
+  // disable elements AFTER formData (or we get no data)
+  utils.disableElements(settings.controls.offrInputs);
+  utils.disableElements(settings.controls.themeInputs);
+  utils.calculate(formData); // no await; will dispatch event on response
+  offrInfoElement.innerHTML = "Checking price...";
+});
 
 // handle any/all Offr events
 const offrEventListener = (e: CustomEvent<OffrEventDetail>) => {
@@ -66,12 +61,13 @@ const offrEventListener = (e: CustomEvent<OffrEventDetail>) => {
       ...settings.controls.themeInputs,
     ]);
   }
-  if (e.detail.type === "change") {
-    offrInfoElement.innerHTML = "Customizing";
-    offrPriceElement.innerHTML = "";
+  if (e.detail.type === "stale") {
+    utils.disableElements(settings.controls.buyButtons); // block checkout
+    offrInfoElement.innerHTML = "";
+    offrInfoElement.appendChild(priceCheckElement);
+    offrPriceElement.innerHTML = ""; // remove price
+    offrPickerElement.innerHTML = ""; // remove selling plan
     utils.clearCustomAttributes();
-    offrPickerElement.innerHTML = "";
-    debounceCalculate();
   }
   if (e.detail.type === "response") {
     offrInfoElement.innerHTML = "";
