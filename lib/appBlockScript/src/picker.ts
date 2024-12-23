@@ -4,6 +4,7 @@ import { getCurrencyRebaseUtil } from "./forShopify.ts";
 import type {
   MaybeAllocatedDetail,
   OffrEventDetail,
+  OffrPricingEventDetail,
   SellingPlan,
   SellingPlanWithAllocation,
 } from "./types.ts";
@@ -132,7 +133,7 @@ export function getPickerListener({
     );
     // announce the pricing
     document.dispatchEvent(
-      new CustomEvent<Extract<OffrEventDetail, { type: "pricing" }>>("offr", {
+      new CustomEvent<OffrPricingEventDetail>("offr", {
         detail: { type: "pricing", ...pricing },
       })
     );
