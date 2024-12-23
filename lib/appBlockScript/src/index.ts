@@ -1,6 +1,6 @@
 // adding zod and schema adds ~300kb to script; instead use type
 import { parseGid } from "@shopify/admin-graphql-api-utilities";
-import { elementFromString, type HtmlFormControlElement } from "./elements.ts";
+import { type HtmlFormControlElement } from "./elements.ts";
 import { buildSellingPlanPicker, getPickerListener } from "./picker.ts";
 import { getOffrBlockData } from "./forOffr.ts";
 import {
@@ -22,6 +22,7 @@ import type {
 import { listenForChangesOn } from "./inputListener.ts";
 import type { NonNullableObject } from "../../common/types.ts";
 import { windowShopify } from "./forShopify.ts";
+import { elementFromString } from "../../common/utils.ts";
 
 // declare custom event(s) we can dispatch
 declare global {

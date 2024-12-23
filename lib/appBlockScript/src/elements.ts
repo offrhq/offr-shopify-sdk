@@ -41,10 +41,3 @@ export function getAttributedInputElements(form: HTMLFormElement) {
   );
   return elements;
 }
-
-export function elementFromString(html: string) {
-  const template = document.createElement("template");
-  template.innerHTML = html;
-  if (!template.content.firstChild) throw "error creating element";
-  return template.content.firstChild;
-}
