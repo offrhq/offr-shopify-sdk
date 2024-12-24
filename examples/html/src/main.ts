@@ -66,8 +66,7 @@ const offrEventListener = (e: CustomEvent<OffrEventDetail>) => {
   }
   if (e.detail.type === "stale") {
     utils.disableElements(settings.controls.buyButtons); // block checkout
-    offrInfoElement.innerHTML = "";
-    offrInfoElement.appendChild(priceCheckElement);
+    offrInfoElement.replaceChildren(priceCheckElement);
     offrPriceElement.innerHTML = ""; // remove price
     offrPickerElement.innerHTML = ""; // remove selling plan
     utils.clearCustomAttributes();
