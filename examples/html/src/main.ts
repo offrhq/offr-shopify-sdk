@@ -22,7 +22,7 @@ let utils: ReturnType<
   (OffrEventDetail & { type: "init" })["offrSetup"]
 >["utils"];
 
-priceCheckElement.addEventListener("click", () => {
+const priceCheck = () => {
   if (!settings.productForm.reportValidity()) return; // block bad calls
   const formData = new FormData(settings.productForm);
   // disable elements AFTER formData (or we get no data)
@@ -30,7 +30,9 @@ priceCheckElement.addEventListener("click", () => {
   utils.disableElements(settings.controls.themeInputs);
   utils.calculate(formData); // no await; will dispatch event on response
   offrInfoElement.innerHTML = "Checking price...";
-});
+};
+priceCheckElement.addEventListener("click", priceCheck);
+priceCheckElement.addEventListener("focus", priceCheck);
 
 // handle any/all Offr events
 const offrEventListener = (e: CustomEvent<OffrEventDetail>) => {
