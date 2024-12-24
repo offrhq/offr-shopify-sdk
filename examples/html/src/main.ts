@@ -32,7 +32,7 @@ const priceCheck = () => {
   offrInfoElement.innerHTML = "Checking price...";
 };
 priceCheckElement.addEventListener("click", priceCheck);
-priceCheckElement.addEventListener("focus", priceCheck);
+priceCheckElement.addEventListener("mousedown", priceCheck); // ignore focus
 priceCheckElement.addEventListener("touchstart", priceCheck); // iOS
 
 // handle any/all Offr events
