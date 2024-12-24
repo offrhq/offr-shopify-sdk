@@ -1,5 +1,5 @@
 import { type ErrorBody } from "../../../lib/common/offr.ts";
-import { parseFormData } from "./input.ts";
+import { parseRequest } from "./input.ts";
 import { getPlanEntries, getSuccessBody } from "./output.ts";
 
 /**
@@ -19,19 +19,15 @@ Deno.serve(async (req) => {
 
 /** returns the success json response */
 const successHandler = async (req: Request) => {
-  /**
-   * the shopper input
-   * https://developer.mozilla.org/en-US/docs/Web/API/FormData
-   */
-  const formData = await req.formData();
-
-  const parsed = parseFormData(formData);
-  if (!parsed.success)
+  const parsed = await parseRequest(req);
+  if (!parsed.success) {
+    console.error(parsed.issues);
     return jsonResponse({
       success: false,
       publicMessage: `${parsed.issues.map((issue) => issue.message)}`,
       privateError: parsed.issues,
     } satisfies ErrorBody);
+  }
 
   const input = parsed.output;
   const planEntries = getPlanEntries(input);
@@ -39,7 +35,6 @@ const successHandler = async (req: Request) => {
 
   // log for development; probably remove these for production
   console.dir(req, { depth: Infinity });
-  console.dir(formData, { depth: Infinity });
   console.dir(response, { depth: Infinity });
 
   return jsonResponse(response);
