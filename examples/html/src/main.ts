@@ -15,6 +15,9 @@ const offrPickerElement = requireEl<HTMLElement>(document, "#offrPicker");
 const priceCheckElement = elementFromString<HTMLButtonElement>(
   `<button>Check pricing</button>`
 );
+const pickerLabelElement = elementFromString<HTMLLabelElement>(
+  `<label>Pick an option</label>`
+);
 
 // core info expected from Offr init
 let settings: Settings;
@@ -79,7 +82,8 @@ const offrEventListener = (e: CustomEvent<OffrEventDetail>) => {
       "It will be a few more moments until the add-to-cart buttons are activated. This can take 30 seconds or more.";
 
     // enable picker for shopper selection
-    offrPickerElement.replaceChildren(e.detail.pricedPicker ?? e.detail.picker);
+    offrPickerElement.replaceChildren(pickerLabelElement);
+    offrPickerElement.appendChild(e.detail.pricedPicker ?? e.detail.picker);
 
     // add the custom attributes to show in cart
     e.detail.data.customAttributes.forEach((attribute) =>
@@ -91,7 +95,8 @@ const offrEventListener = (e: CustomEvent<OffrEventDetail>) => {
 
     // enable picker for shopper selection
     // provided pickers dispatch Offr 'pricing' event
-    offrPickerElement.replaceChildren(e.detail.pricedPicker ?? e.detail.picker);
+    offrPickerElement.replaceChildren(pickerLabelElement);
+    offrPickerElement.appendChild(e.detail.pricedPicker ?? e.detail.picker);
 
     // add the custom attributes to show in cart
     e.detail.data.customAttributes.forEach((attribute) =>
