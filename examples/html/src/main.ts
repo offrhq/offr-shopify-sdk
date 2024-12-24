@@ -33,6 +33,7 @@ const priceCheck = () => {
 };
 priceCheckElement.addEventListener("click", priceCheck);
 priceCheckElement.addEventListener("focus", priceCheck);
+priceCheckElement.addEventListener("touchstart", priceCheck); // iOS
 
 // handle any/all Offr events
 const offrEventListener = (e: CustomEvent<OffrEventDetail>) => {
