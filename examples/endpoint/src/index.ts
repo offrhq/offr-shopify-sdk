@@ -7,7 +7,14 @@ import { getPlanEntries, getSuccessBody } from "./output.ts";
  * https://docs.deno.com/api/deno/~/Deno.serve
  */
 Deno.serve(async (req) => {
-  // basic auth: disallow any requests that don't have the key as the path
+  /**
+   * disallow any requests that don't have the key as the path
+   *
+   * @note
+   * Currently, Offr doesn't accept request headers (such as `authorization`)
+   * for the endpoint. Instead use an unguessable url for security:
+   * https://www.w3.org/2001/tag/doc/capability-urls/
+   */
   if (new URL(req.url).pathname != `/${Deno.env.get("KEY")}`)
     return new Response(null, { status: 401 });
   try {
